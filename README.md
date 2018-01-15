@@ -1,33 +1,36 @@
-# Система решения математических уравнений.
+# Application to solve mathematical equations
 
-Система должна состоять из 2х основных компонентов:
+The system should contain 2 main components:
 
-Фронтенд сервер.
 
-Основной функционал
-RoR приложение должно предоставлять:
- Выбор типа уравнения (по умолчанию линейное и квадратное)
- Форму ввода параметров для решения уравнения
- Передачу параметров уравнения на Бэкенд сервер в формате JSON
- Получение и отображение результата в “дружественном” виде.
-Дополнительные пожелания
-Использование CSS на формах / страницах Выбор, Вввод, Результат
-Использование JS / Ajax / JS-framework на формах / страницах Выбор, Ввод, Результат
-Использование тестовых фреймворков TestUnit / RSpec / Cucumber (один или несколько)
-Обеспечить валидацию параметров и обработку исключительных ситуаций (500 от бэкенда, ввод буквенных
-параметров, ввод дробных параметров и тд)
+Frontend server
 
-Бэкенд сервер.
+RoR application must provide:
+1. Selection of the type of equation (the default are linear and quadratic)
+2. The form for inputting the parameters of the solution
+3. Sending the parameters of the equation to the backend server using JSON
+4. Displaying the result in the "friendly" format.
 
-Основной функционал
-Допустимо использование приложения на Sinatra или подобном фреймворке. Приложение должно:
-Предоставить точку входа для получения параметров уравнения
-Обеспечить решение уравнения
-Предоставить ответ в формате JSON
-Дополнительные пожелания
-Использование наследования при решении различных типов уравнения (единый интерфейс для решения любого
-типа уравнения)
-Обеспечение валидации параметров и обработки исключительных ситуаций (недостаточное количество
-параметров, неверный тип уравнения, неверный тип аргументов и тд)
-Использование TestUnit / RSpec / Cucumber
-Использование аутентификации при приеме запроса.
+Features are welcome:
+
+1. Use CSS for web page design (input form, result page, progress bar/spinner)
+2. Use JS / Ajax / JS-framework in forms, selection page, input, output, and validation
+3. Use test frameworks TestUnit / RSpec / Cucumber (one or more)
+4. Validate parameters and handle exceptions (500 backend, entering letters parameters, input of fractional parameters,etc.)
+
+
+Backend server requirements
+
+The application must be written in Ruby or Sinatra or similar framework, NOT Rails or RailsAPI.
+The application must:
+
+1. Provide an API for the parameters for solving equation
+2. Solve the equation
+3. Return the response in JSON format
+
+Features are welcomed:
+
+1. Use class inheritance to provide single object interface for solving various types of equations.
+2. Use parameter validations and exception handling (insufficient number of parameters, wrong type of equation, wrong type of argument, etc.) and return the error in friendly format.
+3. Use TestUnit / RSpec / Cucumber (one or more)
+4. Using the authentication to backend access
