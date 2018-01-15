@@ -1,0 +1,38 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/home/patron/Projects/MathEquationService/app/channels/application_cable/channel.rb": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "/home/patron/Projects/MathEquationService/app/channels/application_cable/connection.rb": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "/home/patron/Projects/MathEquationService/app/controllers/application_controller.rb": [
+        0,
+        0
+      ],
+      "/home/patron/Projects/MathEquationService/app/mailers/application_mailer.rb": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "/home/patron/Projects/MathEquationService/app/jobs/application_job.rb": [
+        0,
+        0
+      ],
+      "/home/patron/Projects/MathEquationService/app/models/application_record.rb": [
+        0,
+        0,
+        0
+      ]
+    },
+    "timestamp": 1516029520
+  }
+}
