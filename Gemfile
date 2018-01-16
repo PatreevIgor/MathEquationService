@@ -9,7 +9,6 @@ end
 
 gem 'puma', '~> 3.7'
 gem 'rails', '~> 5.1.3'
-gem 'rubocop', require: false
 gem 'sqlite3'
 
 group :development, :test do
@@ -20,6 +19,8 @@ end
 
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'pry'
+  gem 'rubocop', require: false
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
