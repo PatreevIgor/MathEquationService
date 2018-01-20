@@ -29,5 +29,21 @@ describe LinearEquationParamsValidator do
         expect(subject.valid_params?).to be false
       end
     end
+
+    context 'when equation has no solutions' do
+      let(:params) { { a: 0, b: 1 } }
+
+      it 'returns false' do
+        expect(subject.valid_params?).to be false
+      end
+    end
+
+    context 'when equation has many solutions' do
+      let(:params) { { a: 0, b: 0 } }
+
+      it 'returns false' do
+        expect(subject.valid_params?).to be false
+      end
+    end
   end
 end
