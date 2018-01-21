@@ -8,10 +8,30 @@ describe LinearEquationSolver do
   describe '#solve_equation' do
     context 'when params are valid' do
       let(:params) { { a: 1, b: 2 } }
-      let(:x)      { -1 * params[:b] / params[:a] }
+      let(:result) { -2 }
 
-      it 'returns x' do
-        expect(subject.solve_equation).to eq(x)
+      it 'returns result' do
+        expect(subject.solve_equation).to eq(result)
+      end
+    end
+
+    context 'when params are not valid' do
+      context 'when equation does not have solutions' do
+        let(:params) { { a: 0, b: 1 } }
+        let(:result) { nil }
+
+        it 'returns nil' do
+          expect(subject.solve_equation).to eq(result)
+        end
+      end
+
+      context 'when equation has many solutions' do
+        let(:params) { { a: 0, b: 0 } }
+        let(:result) { Float::INFINITY }
+
+        it 'returns infinite number' do
+          expect(subject.solve_equation).to eq(result)
+        end
       end
     end
   end
