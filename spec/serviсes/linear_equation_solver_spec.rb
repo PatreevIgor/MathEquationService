@@ -16,7 +16,7 @@ describe LinearEquationSolver do
     end
 
     context 'when params are not valid' do
-      context 'when equation does not have solutions' do
+      context 'when param a is equal 0 and b is not' do
         let(:params) { { a: 0, b: 1 } }
         let(:result) { nil }
 
@@ -25,7 +25,7 @@ describe LinearEquationSolver do
         end
       end
 
-      context 'when equation has many solutions' do
+      context 'when param a and b is equal 0' do
         let(:params) { { a: 0, b: 0 } }
         let(:result) { Float::INFINITY }
 

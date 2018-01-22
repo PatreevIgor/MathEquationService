@@ -11,24 +11,24 @@ class LinearEquationSolver
   attr_reader :params, :a, :b
 
   def initialize(params)
-    @a = params[:a]
-    @b = params[:b]
+    @a = params[:a].to_f
+    @b = params[:b].to_f
   end
 
   def solve_equation
     return Float::INFINITY if many_solution?
     return nil             if without_solution?
 
-    -1 * b.to_f / a.to_f
+    -1 * b / a
   end
 
   private
 
   def many_solution?
-    a.to_f.zero? && b.to_f.zero?
+    a.zero? && b.zero?
   end
 
   def without_solution?
-    a.to_f.zero? && b != 0
+    a.zero? && b != 0
   end
 end

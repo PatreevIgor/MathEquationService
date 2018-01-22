@@ -7,70 +7,39 @@ describe Api::LinearEquationsController do
     before { allow_any_instance_of(described_class).to receive(:params_validator).and_return(params_validator) }
 
     context 'when params are valid' do
+      let(:params)                 { { a: 1, b: 2 } }
       let(:params_validator)       { double(:params_validator, valid_params?: true) }
       let(:linear_equation_solver) { double(:linear_equation_solver, solve_equation: result) }
-      let(:success_result)         { { result: result }.to_json }
-      let(:valid_params)           { { a: 1, b: 2 } }
       let(:result)                 { -2.0 }
 
-      it 'returns success result' do
-        post :solve, params: valid_params
+      before do
+        allow_any_instance_of(described_class).to receive(:linear_equation_solver).and_return(linear_equation_solver)
+      end
 
-        expect(response.body).to eq(success_result)
+      it 'responses without errors' do
+        expect(params_validator).to       receive(:valid_params?)
+        expect(linear_equation_solver).to receive(:solve_equation)
+
+        post :solve, params: params
+
+        expect(response.body).to eq({ result: result }.to_json)
+        expect(response.code).to eq('200')
       end
     end
 
     context 'when params are not valid' do
-      let(:errors_object)    { double(:errors_object, full_messages: messages_object) }
-      let(:messages_object)  { double(:messages_object, to_sentence: error_message) }
+      let(:params)           { { a: 1, b: 2 } }
       let(:params_validator) { double(:params_validator, valid_params?: false, errors: errors_object) }
+      let(:errors_object)    { double(:errors_object, full_messages: message_object) }
+      let(:message_object)   { double(:message_object, to_sentence: 'some_message') }
 
-      context 'when params contain wrong type' do
-        let(:failure_result) { { errors: error_message }.to_json }
-        let(:invalid_params) { { a: 'some text', b: 2 } }
-        let(:error_message)  { 'wrong type of a' }
+      it 'responses with errors' do
+        expect(params_validator).to receive(:valid_params?)
 
-        it 'returns failure result' do
-          post :solve, params: invalid_params
+        post :solve, params: params
 
-          expect(response.body).to eq(failure_result)
-        end
-      end
-
-      context 'when not full params' do
-        let(:failure_result) { { errors: error_message }.to_json }
-        let(:invalid_params) { { b: 1 } }
-        let(:error_message)  { 'a can not be blank' }
-
-        it 'returns failure result' do
-          post :solve, params: invalid_params
-
-          expect(response.body).to eq(failure_result)
-        end
-      end
-
-      context 'when equation has no solutions' do
-        let(:failure_result) { { errors: error_message }.to_json }
-        let(:invalid_params) { { a: 0, b: 1 } }
-        let(:error_message)  { 'equation does not have solutions' }
-
-        it 'returns failure result' do
-          post :solve, params: invalid_params
-
-          expect(response.body).to eq(failure_result)
-        end
-      end
-
-      context 'when equation has many solutions' do
-        let(:failure_result) { { errors: error_message }.to_json }
-        let(:invalid_params) { { a: 0, b: 0 } }
-        let(:error_message)  { 'equation has many solutions' }
-
-        it 'returns failure result' do
-          post :solve, params: invalid_params
-
-          expect(response.body).to eq(failure_result)
-        end
+        expect(response.body).to eq({ errors: 'some_message' }.to_json)
+        expect(response.code).to eq('200')
       end
     end
   end
