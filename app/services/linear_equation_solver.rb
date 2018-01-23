@@ -6,8 +6,6 @@
 # if a != 0, => the equation has 1 solution: x = -b\a
 
 class LinearEquationSolver
-  include ActiveModel::Model
-
   attr_reader :params, :a, :b
 
   def initialize(params)
