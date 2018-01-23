@@ -16,12 +16,13 @@ class QuadraticEquationParamsValidator
   private
 
   def equation_does_not_have_solutions
-    return unless discriminant < 0
+    return if discriminant.positive?
+    return if discriminant.zero?
 
     errors.add(:base, 'equation does not have solutions')
   end
 
   def discriminant
-    (b ** 2) - (4 * a * c)
+    (b.to_f**2) - (4 * a.to_f * c.to_f)
   end
 end

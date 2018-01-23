@@ -34,7 +34,7 @@ describe Api::LinearEquationsController do
       let(:message_object)   { double(:message_object, to_sentence: 'some_message') }
 
       it 'responses with errors' do
-        expect(params_validator).to receive(:valid_params?)
+        expect(params_validator).to receive(:valid_params?).and_return(false)
 
         post :solve, params: params
 

@@ -9,38 +9,22 @@ describe Api::QuadraticEquationsController do
     context 'when params are valid' do
       let(:params_validator)          { double(:params_validator, valid_params?: true) }
       let(:quadratic_equation_solver) { double(:quadratic_equation_solver, solve_equation: result) }
+      let(:params)                    { { a: 1, b: 2, c: -3 } }
+      let(:result)                    { [1.0, -3.0] }
 
-      before { allow_any_instance_of(described_class).to receive(:quadratic_equation_solver).and_return(
-               quadratic_equation_solver) }
-
-      context 'when params a,b,c = 1,2,-3' do
-        let(:params) { { a: 1, b: 2, c: -3 } }
-        let(:result) { [1.0,-3.0] }
-
-        it 'responses without errors' do
-          expect(params_validator).to          receive(:valid_params?)
-          expect(quadratic_equation_solver).to receive(:solve_equation)
-
-          post :solve, params: params
-
-          expect(response.body).to eq({ result: result }.to_json)
-          expect(response.code).to eq('200')
-        end
+      before do
+        allow_any_instance_of(described_class).to receive(:quadratic_equation_solver)
+          .and_return(quadratic_equation_solver)
       end
 
-      context 'when params a,b,c = 1,2,1' do
-        let(:params) { { a: 1, b: 2, c: 1 } }
-        let(:result) { -1.0 }
+      it 'responses without errors' do
+        expect(params_validator).to          receive(:valid_params?)
+        expect(quadratic_equation_solver).to receive(:solve_equation)
 
-        it 'responses without errors' do
-          expect(params_validator).to          receive(:valid_params?)
-          expect(quadratic_equation_solver).to receive(:solve_equation)
+        post :solve, params: params
 
-          post :solve, params: params
-
-          expect(response.body).to eq({ result: result }.to_json)
-          expect(response.code).to eq('200')
-        end
+        expect(response.body).to eq({ result: result }.to_json)
+        expect(response.code).to eq('200')
       end
     end
 

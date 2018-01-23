@@ -14,16 +14,16 @@ module Api
 
     private
 
-    def quadratic_equation_solver
-      @quadratic_equation_solver ||= QuadraticEquationSolver.new(quadratic_equation_params)
-    end
-
     def params_validator
       @params_validator ||= QuadraticEquationParamsValidator.new(quadratic_equation_params)
     end
 
     def quadratic_equation_params
       params.permit(:a, :b, :c)
+    end
+
+    def quadratic_equation_solver
+      @quadratic_equation_solver ||= QuadraticEquationSolver.new(quadratic_equation_params)
     end
   end
 end
