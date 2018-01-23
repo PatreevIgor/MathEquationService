@@ -7,32 +7,16 @@ describe QuadraticEquationParamsValidator do
 
   describe '#valid_params?' do
     context 'when params are valid' do
-      context 'when equation has two solutions' do
-        let(:params) { { a: 1, b: 2, c: -3 } }
+      let(:params) { { a: 1, b: 2, c: -3 } }
 
-        it 'returns true' do
-          expect(subject.valid_params?).to be true
-        end
-
-        it 'does not fill errors' do
-          subject.valid_params?
-
-          expect(subject.errors.full_messages).to be_empty
-        end
+      it 'returns true' do
+        expect(subject.valid_params?).to be true
       end
 
-      context 'when equation has only one solution' do
-        let(:params) { { a: 1, b: 2, c: 1 } }
+      it 'does not fill errors' do
+        subject.valid_params?
 
-        it 'returns true' do
-          expect(subject.valid_params?).to be true
-        end
-
-        it 'does not fill errors' do
-          subject.valid_params?
-
-          expect(subject.errors.full_messages).to be_empty
-        end
+        expect(subject.errors.full_messages).to be_empty
       end
     end
 
@@ -102,7 +86,7 @@ describe QuadraticEquationParamsValidator do
 
         context 'when missing param B' do
           let(:params)        { { a: 2, c: 3 } }
-          let(:full_messages) { ["B can't be blank", 'B is not a number', 'equation does not have solutions'] }
+          let(:full_messages) { ["B can't be blank", 'B is not a number'] }
 
           it 'returns false' do
             expect(subject.valid_params?).to be false
@@ -128,21 +112,6 @@ describe QuadraticEquationParamsValidator do
 
             expect(subject.errors.full_messages).to eq(full_messages)
           end
-        end
-      end
-
-      context 'when discriminant of params is negative' do
-        let(:params)        { { a: 1, b: 2, c: 5 } }
-        let(:full_messages) { ['equation does not have solutions'] }
-
-        it 'returns false' do
-          expect(subject.valid_params?).to be false
-        end
-
-        it 'fills errors' do
-          subject.valid_params?
-
-          expect(subject.errors.full_messages).to eq(full_messages)
         end
       end
     end
