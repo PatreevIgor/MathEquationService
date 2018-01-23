@@ -13,7 +13,7 @@ describe Api::QuadraticEquationsController do
       before { allow_any_instance_of(described_class).to receive(:quadratic_equation_solver).and_return(
                quadratic_equation_solver) }
 
-      context 'when equation has one result' do
+      context 'when params a,b,c = 1,2,-3' do
         let(:params) { { a: 1, b: 2, c: -3 } }
         let(:result) { [1.0,-3.0] }
 
@@ -28,7 +28,7 @@ describe Api::QuadraticEquationsController do
         end
       end
 
-      context 'when equation has two results' do
+      context 'when params a,b,c = 1,2,1' do
         let(:params) { { a: 1, b: 2, c: 1 } }
         let(:result) { -1.0 }
 
