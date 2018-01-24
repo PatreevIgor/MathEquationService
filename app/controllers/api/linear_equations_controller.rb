@@ -18,10 +18,6 @@ module Api
       @params_validator ||= LinearEquationParamsValidator.new(linear_equation_params)
     end
 
-    def linear_equation_solver
-      @linear_equation_solver ||= LinearEquationSolver.new(linear_equation_params)
-    end
-
     def linear_equation_params
       params.permit(:a, :b)
     end

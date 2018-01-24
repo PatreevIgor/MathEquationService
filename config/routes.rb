@@ -10,6 +10,7 @@ Rails.application.routes.draw do
                      controller: :linear_equations
       post '/solve', constraints: ->(request) { request.params[:type] == QUADRATIC_TYPE },
                      controller: :quadratic_equations
+      post '/solve', to: ->(_env) { TypeErrorResponsePresenter.new.present_as_response }
     end
   end
 end
