@@ -25,7 +25,7 @@ module Api
     def quadratic_equation_solver
       @quadratic_equation_solver ||= QuadraticEquationSolver.new(quadratic_equation_params)
     end
-    
+
     def success_result_presenter
       @success_result_presenter ||= SuccessResultPresenter.new
     end
