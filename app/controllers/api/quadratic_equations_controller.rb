@@ -8,7 +8,7 @@ module Api
 
         render json: { result: result }
       else
-        render json: { errors: params_validator.errors.full_messages.to_sentence }
+        render json: errors_response_presenter.present(params_validator.errors)
       end
     end
 
@@ -24,6 +24,10 @@ module Api
 
     def quadratic_equation_solver
       @quadratic_equation_solver ||= QuadraticEquationSolver.new(quadratic_equation_params)
+    end
+
+    def errors_response_presenter
+      @errors_response_presenter ||= ErrorResponsePresenter.new
     end
   end
 end
