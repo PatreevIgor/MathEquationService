@@ -18,6 +18,6 @@ class TypeErrorResponsePresenter
   end
 
   def response_message
-    [{ errors: TYPE_ERROR_MESSAGE }.to_json]
+    [{ errors: TYPE_ERROR_MESSAGE, code: Constants::RESULT_CODES[:wrong_type] }.to_json]
   end
 end

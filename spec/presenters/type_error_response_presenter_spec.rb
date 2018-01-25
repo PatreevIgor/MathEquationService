@@ -7,7 +7,11 @@ describe TypeErrorResponsePresenter do
 
   describe '#present_as_response' do
     let(:result) do
-      [200, { 'Content-Type' => 'application/javascript' }, [{ errors: described_class::TYPE_ERROR_MESSAGE }.to_json]]
+      [
+        200,
+        { 'Content-Type' => 'application/javascript' },
+        [{ errors: described_class::TYPE_ERROR_MESSAGE, code: 2 }.to_json]
+      ]
     end
 
     it 'returns error message' do
