@@ -3,14 +3,14 @@
 require 'rails_helper'
 
 describe SuccessResultPresenter do
-  subject { described_class.new }
+  subject { described_class.new(params) }
 
   describe '#present' do
     let(:params) { 'some content' }
-    let(:result) { { result: params } }
+    let(:result) { { result: params, code: 0 } }
 
     it 'returns result' do
-      expect(subject.present(params)).to eq(result)
+      expect(subject.present).to eq(result)
     end
   end
 end

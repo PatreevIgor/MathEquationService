@@ -22,7 +22,7 @@ describe Api::LinearEquationsController do
 
         post :solve, params: params
 
-        expect(response.body).to eq({ result: result }.to_json)
+        expect(response.body).to eq({ result: result, code: 0 }.to_json)
         expect(response.code).to eq('200')
       end
     end
@@ -31,14 +31,15 @@ describe Api::LinearEquationsController do
       let(:params)           { { a: 1, b: 2 } }
       let(:params_validator) { double(:params_validator, valid_params?: false, errors: errors_object) }
       let(:errors_object)    { double(:errors_object, full_messages: message_object) }
-      let(:message_object)   { double(:message_object, to_sentence: 'some_message') }
+      let(:message_object)   { double(:message_object, to_sentence: message) }
+      let(:message)          { 'some_message' }
 
       it 'responses with errors' do
         expect(params_validator).to receive(:valid_params?).and_return(false)
 
         post :solve, params: params
 
-        expect(response.body).to eq({ errors: 'some_message' }.to_json)
+        expect(response.body).to eq({ errors: message, code: 1 }.to_json)
         expect(response.code).to eq('200')
       end
     end
