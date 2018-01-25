@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class SuccessResultPresenter
+  INFINITY_SOLUTIONS_MESSAGE = 'Sorry, this equation has infinity solutions'
+  MISSING_SOLUTIONS_MESSAGE  = 'Sorry, this equation does not have solutions'
+
   attr_reader :result
 
   def initialize(result)
@@ -8,7 +11,7 @@ class SuccessResultPresenter
   end
 
   def present
-    { result: result, code: result_code(result) }
+    { result: friendly_result(result), code: result_code(result) }
   end
 
   private
@@ -18,5 +21,12 @@ class SuccessResultPresenter
     return Constants::RESULT_CODES[:no_solutions] if result.nil?
 
     Constants::RESULT_CODES[:success]
+  end
+
+  def friendly_result(result)
+    return INFINITY_SOLUTIONS_MESSAGE if result == Float::INFINITY
+    return MISSING_SOLUTIONS_MESSAGE  if result.nil?
+
+    result
   end
 end
