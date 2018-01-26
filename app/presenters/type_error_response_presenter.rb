@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+# The class generates the response message, which contains wrong type equation and response code.
+# This inspection is done at the level of routing.
+
 class TypeErrorResponsePresenter
   TYPE_ERROR_MESSAGE = 'This type of equation is not supported'
 

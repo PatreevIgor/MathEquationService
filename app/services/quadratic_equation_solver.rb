@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# The class solves the quadratic equation.
 # Quadratic Equations: a * x**2 + b * x + c = 0
 # discriminant = (b**2) - (4 * a * c)
 # if discriminant > 0, =>

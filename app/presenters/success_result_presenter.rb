@@ -1,10 +1,13 @@
 # frozen_string_literal: true
 
+# The class generates the response message, which contains friendly result and response code.
+# Friendly result is converted from the result.
+
 class SuccessResultPresenter
   INFINITY_SOLUTIONS_MESSAGE = 'Sorry, this equation has infinity solutions'
   MISSING_SOLUTIONS_MESSAGE  = 'Sorry, this equation does not have solutions'
 
-  attr_reader :result
+  attr_reader :resul
 
   def initialize(result)
     @result = result

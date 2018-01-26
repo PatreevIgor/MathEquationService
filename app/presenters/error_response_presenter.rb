@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# The class generates the response message, which contains the error and response code.
+
 class ErrorResponsePresenter
   attr_reader :errors_object
 

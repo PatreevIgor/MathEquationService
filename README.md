@@ -1,4 +1,4 @@
-# Application to solve mathematical equations
+# Application to solve mathematical equations (back end application)
 
 The application accepts requests JSON format with the given parameters to solve the equation, solves the equation and sends the response to the user. The response consists of a response code and result.
 The app is fully covered by unit tests (Rspec).
