@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# The module contains codes for responses to requests.
+
 module Constants
   RESULT_CODES = {
     success:          0,

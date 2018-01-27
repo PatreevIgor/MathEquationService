@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
+# The class solves the linear equation.
 # Linear Equations: ax + b = 0
-# if a == 0 && b == 0, => the equation has many solutions
-# if a == 0 && b != 0, => the equation does not have solutions
-# if a != 0, => the equation has 1 solution: x = -b\a
+# if a == 0 and b == 0, => the equation has many solutions
+# if a == 0 and b != 0, => the equation does not have solutions
+# if a != 0,            => the equation has 1 solution: x = -b\a
 
 class LinearEquationSolver
   attr_reader :params, :a, :b

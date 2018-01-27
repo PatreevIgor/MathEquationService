@@ -1,36 +1,100 @@
-# Application to solve mathematical equations
+# Application to solve mathematical equations (back end application)
 
-The system should contain 2 main components:
+The application accepts requests JSON format with the given parameters to solve the equation, solves the equation and sends the response to the user. The response consists of a response code and result.
+The app is fully covered by unit tests (Rspec).
 
+Requests are sent to: http://localhost:3000/api/equations/solve
 
-Frontend server
+Response code:
 
-RoR application must provide:
-1. Selection of the type of equation (the default are linear and quadratic)
-2. The form for inputting the parameters of the solution
-3. Sending the parameters of the equation to the backend server using JSON
-4. Displaying the result in the "friendly" format.
+  0 - success, the equation has one or 2 solutions
 
-Features are welcome:
+  1 - validation_error, validation error
 
-1. Use CSS for web page design (input form, result page, progress bar/spinner)
-2. Use JS / Ajax / JS-framework in forms, selection page, input, output, and validation
-3. Use test frameworks TestUnit / RSpec / Cucumber (one or more)
-4. Validate parameters and handle exceptions (500 backend, entering letters parameters, input of fractional parameters,etc.)
+  2 - wrong_type, wrong type equations
 
+  3 - infinity, the equation has infinite number of solutions
 
-Backend server requirements
+  4 - no_solutions, the equation is not have solutions
 
-The application must be written in Ruby or Sinatra or similar framework, NOT Rails or RailsAPI.
-The application must:
+Query parameters:
 
-1. Provide an API for the parameters for solving equation
-2. Solve the equation
-3. Return the response in JSON format
+  type - the type of the equation, possible options are 'linear', 'quadratic';
 
-Features are welcomed:
+  a    - the value of a variable linear or quadratic equation, available format: string, integer;
 
-1. Use class inheritance to provide single object interface for solving various types of equations.
-2. Use parameter validations and exception handling (insufficient number of parameters, wrong type of equation, wrong type of argument, etc.) and return the error in friendly format.
-3. Use TestUnit / RSpec / Cucumber (one or more)
-4. Using the authentication to backend access
+  b    - the value of a variable linear or quadratic equation, available format: string, integer;
+
+  c    - the value of the variable quadratic equations, available format: string, integer.
+
+Validations:
+
+  Type checking of the equation
+
+  Type checking variables of the equation
+
+  Check presence the variables of the equation
+
+Example query:
+
+  Successful queries and answers:
+
+    1. Solution of linear equations, there are 3 possible cases:
+
+      1.1 The Equation has one solution.
+
+        Sample request: { type: 'linear', a: 1, b: 2 }
+
+        Example response: {"result":-2.0,"code":0}
+
+      1.2 Equation has many solutions.
+
+        Sample request: {type: 'linear', a: 0, b: 0}
+
+        Example response: {"result":"Sorry, this equation has infinity solutions","code":3}
+
+      1.3 The Equation has no solutions.
+
+        Sample request: {type: 'linear', a: 0, b: 1}
+
+        Example response: {"result":"Sorry, this equation does not have solutions","code":4}
+
+    2. The solution to the quadratic equation, there are 3 possible cases:
+
+      2.1 The Equation has one solution.
+
+        Sample request: { type: 'quadratic', a: 1, b: 2, c: 1 }
+
+        Example response: {"result":-1.0,"code":0}
+
+      2.2 the Equation has two solutions.
+
+        Sample request: { type: 'quadratic', a: 1, b: 2, c: -3 }
+
+        Example response: {"result":[1.0,-3.0],"code":0}
+
+      2.3 the Equation has no solutions.
+
+        Sample request: { type: 'quadratic', a: 1, b: 2, c: 5 }
+
+        Example response: {"result":"Sorry, this equation does not have solutions","code":4}
+
+  Erroneous queries and answers:
+
+    1. Wrong type of equation, or its absence:
+
+      Sample request: { type: 'unknown_type', a: 1, b: 2, c: 5 }
+
+      Example response: {"errors":"This type of equation is not supported","code":2}
+
+    2. Invalid type passed to variables:
+
+      Sample request: { type: 'linear', a: 'string', b: 2, c: 5 }
+
+      Example response: {"errors":"A is not a number","code":1}
+
+    3. Missing variables to solve the equation:
+
+      Sample request: { type: 'linear', b: 2, c: 5 }
+
+      Example response: {"errors":"can't be blank and A is not a number","code":1}
